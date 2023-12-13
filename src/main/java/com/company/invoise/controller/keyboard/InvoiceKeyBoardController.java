@@ -1,19 +1,25 @@
-package com.company.invoise.controller;
+package com.company.invoise.controller.keyboard;
 
+import com.company.invoise.controller.InvoiceControllerInterface;
 import com.company.invoise.entity.Invoice;
 import com.company.invoise.services.InvoiceServiceInterface;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
 import java.util.Scanner;
 
+//@Controller
 public class InvoiceKeyBoardController implements InvoiceControllerInterface {
-    private InvoiceServiceInterface invoiceServiceInterface;
+
+    @Autowired
+    private final InvoiceServiceInterface invoiceServiceInterface;
+
+    public InvoiceKeyBoardController(InvoiceServiceInterface invoiceServiceInterface) {
+        this.invoiceServiceInterface = invoiceServiceInterface;
+    }
 
     public InvoiceServiceInterface getInvoiceServiceInterface() {
         return invoiceServiceInterface;
-    }
-
-    public void setInvoiceServiceInterface(InvoiceServiceInterface invoiceServiceInterface) {
-        this.invoiceServiceInterface = invoiceServiceInterface;
     }
 
     public void createInvoice()

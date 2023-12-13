@@ -4,5 +4,4 @@ import com.company.invoise.services.InvoiceServiceInterface;
 
 public interface InvoiceControllerInterface {
     default void createInvoice() {};
-    default void setInvoiceServiceInterface(InvoiceServiceInterface invoiceServiceInterface) {};
 }
