@@ -1,15 +1,15 @@
-package com.company.invoise.services.prefix;
+package com.company.invoice.core.services.prefix;
 
-import com.company.invoise.entity.Invoice;
-import com.company.invoise.repository.InvoiceRepositoryInterface;
-import com.company.invoise.services.InvoiceServiceInterface;
+import com.company.invoice.core.entity.Invoice;
+import com.company.invoice.core.repository.InvoiceRepositoryInterface;
+import com.company.invoice.core.services.InvoiceServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
+import java.util.List;
 
-@Service
+//@Service
 public class InvoiceServicePrefix implements InvoiceServiceInterface {
 
     @Value("${invoice.lastNumber}")
@@ -29,9 +29,21 @@ public class InvoiceServicePrefix implements InvoiceServiceInterface {
         return invoiceRepository;
     }
 
-    public void  createInvoice(Invoice invoice){
+    public Invoice  createInvoice(Invoice invoice){
         invoice.setNumber(prefix+(++lastNumber));
-        invoiceRepository.create(invoice);
+        invoiceRepository.save(invoice);
+
+        return invoice;
+    }
+
+    @Override
+    public Iterable<Invoice> getInvoices() {
+        return invoiceRepository.findAll();
+    }
+
+    @Override
+    public Invoice getInvoice(String number) {
+        return invoiceRepository.findById(number).orElseThrow();
     }
 
     public long getLastNumber() {

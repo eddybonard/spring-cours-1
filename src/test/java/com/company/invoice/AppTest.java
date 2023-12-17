@@ -1,4 +1,4 @@
-package com.company.invoise;
+package com.company.invoice;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

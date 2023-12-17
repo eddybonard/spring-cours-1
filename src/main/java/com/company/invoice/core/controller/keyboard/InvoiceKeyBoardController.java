@@ -1,10 +1,10 @@
-package com.company.invoise.controller.keyboard;
+package com.company.invoice.core.controller.keyboard;
 
-import com.company.invoise.controller.InvoiceControllerInterface;
-import com.company.invoise.entity.Invoice;
-import com.company.invoise.services.InvoiceServiceInterface;
+import com.company.invoice.core.controller.InvoiceControllerInterface;
+import com.company.invoice.core.entity.Customer;
+import com.company.invoice.core.entity.Invoice;
+import com.company.invoice.core.services.InvoiceServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 
 import java.util.Scanner;
 
@@ -22,7 +22,7 @@ public class InvoiceKeyBoardController implements InvoiceControllerInterface {
         return invoiceServiceInterface;
     }
 
-    public void createInvoice()
+    public String createInvoice(Invoice invoice)
     {
         System.out.println( "What you customer name ? " );
 
@@ -30,9 +30,12 @@ public class InvoiceKeyBoardController implements InvoiceControllerInterface {
 
         String customerName = sc.nextLine();
 
-        Invoice invoice = new Invoice();
-        invoice.setCustomerName(customerName);
+        invoice = new Invoice();
+        Customer customer = new Customer(customerName);
+        invoice.setCustomer(customer);
 
         invoiceServiceInterface.createInvoice(invoice);
+
+        return null;
     }
 }

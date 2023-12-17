@@ -1,10 +1,10 @@
-package com.company.invoise.controller.scan;
+package com.company.invoice.core.controller.scan;
 
-import com.company.invoise.controller.InvoiceControllerInterface;
-import com.company.invoise.entity.Invoice;
-import com.company.invoise.services.InvoiceServiceInterface;
+import com.company.invoice.core.controller.InvoiceControllerInterface;
+import com.company.invoice.core.entity.Customer;
+import com.company.invoice.core.entity.Invoice;
+import com.company.invoice.core.services.InvoiceServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 
 //@Controller
 public class InvoiceDouchetteController implements InvoiceControllerInterface {
@@ -20,12 +20,15 @@ public class InvoiceDouchetteController implements InvoiceControllerInterface {
         return invoiceServiceInterface;
     }
 
-    public void createInvoice()
+    public String createInvoice(Invoice invoice)
     {
         System.out.println( "Usage scanner ? " );
-        Invoice invoice = new Invoice();
-        invoice.setCustomerName("virgin");
+        invoice = new Invoice();
+        Customer customer = new Customer("Virgin");
+        invoice.setCustomer(customer);
 
         invoiceServiceInterface.createInvoice(invoice);
+
+        return null;
     }
 }
